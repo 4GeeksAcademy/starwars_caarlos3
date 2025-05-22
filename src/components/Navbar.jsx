@@ -7,6 +7,10 @@ export const Navbar = () => {
 
 	const { store, dispatch } = useGlobalReducer(); 
 
+	const handleRemoveFromFavorites = (uid) => {
+		dispatch({ type: 'FAVORITES_REMOVE', payload: uid })
+	};
+
 	return (
 		<nav className="navbar navbar-dark bg-dark">
 			<div className="container">
@@ -20,7 +24,7 @@ export const Navbar = () => {
 						</button>
 						<ul className="dropdown-menu">
 							{store.favorites?.map((item, index) => (
-								<li key={index}>
+								<li key={index} onClick={() => handleRemoveFromFavorites(item.uid)}>
 									<a className="dropdown-item" href="#">{item.name}</a>
 								</li>
 							))}

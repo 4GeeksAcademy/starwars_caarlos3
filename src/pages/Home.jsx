@@ -11,9 +11,8 @@ function CardsViwer() {
 	const handleAddToFavorites = (item) => {
 		dispatch({ type: 'FAVORITES_ADD', payload: item })
 	}
-	const handleRemoveFromFavorites = (uid) => {
-		dispatch({ type: 'FAVORITES_REMOVE', payload: uid })
-	}
+	
+	
 	const handleToggleFavorites = (item) => {
 		if (store.favorites.some((favorite) => favorite.uid === item.uid)) {
 			handleRemoveFromFavorites(item.uid);
@@ -102,7 +101,7 @@ function CardsViwer() {
 									</Card.Text>
 									<div className="d-flex justify-content-between">
 									<Button variant="dark" >Learn more!!</Button>
-									<Button variant="danger" className="d-flex justify-content-center"><i className="fa-solid fa-star"></i></Button>
+									<Button variant="danger" className="d-flex justify-content-center" onClick={()=>handleAddToFavorites(personajes)}><i className="fa-solid fa-star"></i></Button>
 									</div>
 								</Card.Body>
 							</Card>
@@ -125,7 +124,7 @@ function CardsViwer() {
 									</Card.Text>
 									<div className="d-flex justify-content-between">
 									<Button variant="dark" >Learn more!!</Button>
-									<Button variant="danger" className="d-flex justify-content-center" onClick={handleAddToFavorites}><i className="fa-solid fa-star"></i></Button>
+									<Button variant="danger" className="d-flex justify-content-center" onClick={()=>handleAddToFavorites(planetas)}><i className="fa-solid fa-star"></i></Button>
 									</div>
 								</Card.Body>
 							</Card>
@@ -148,7 +147,7 @@ function CardsViwer() {
 									</Card.Text>
 									<div className="d-flex justify-content-between mt-3">
 									<Button variant="dark" >Learn more!!</Button>
-									<Button variant="danger" className="d-flex justify-content-center"><i className="fa-solid fa-star"></i></Button>
+									<Button variant="danger" className="d-flex justify-content-center" onClick={()=> handleAddToFavorites(vehicle)}><i className="fa-solid fa-star"></i></Button>
 									</div>
 								</Card.Body>
 							</Card>
