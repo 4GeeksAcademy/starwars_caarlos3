@@ -25,7 +25,7 @@ export const router = createBrowserRouter(
         {/* Nested Routes: Defines sub-routes within the BaseHome component. */}
         <Route path= "/" element={<CardsViwer />} />
         <Route path="/single/:theId" element={ <Single />} />  {/* Dynamic route for single items */}
-        <Route path="/demo" element={<Demo />} />
+        <Route path="/demo/:type/:uid" element={<Demo />} />
       </Route>
     )
 );

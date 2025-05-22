@@ -2,27 +2,19 @@ import useGlobalReducer from "../hooks/useGlobalReducer.jsx";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { useEffect } from "react";
 import { Card, Button } from 'react-bootstrap';
+import { useNavigate } from "react-router-dom";
 
 
 function CardsViwer() {
 
 	const { store, dispatch } = useGlobalReducer();
 
+	const navigate = useNavigate();
+
 	const handleAddToFavorites = (item) => {
 		dispatch({ type: 'FAVORITES_ADD', payload: item })
 	}
-	
-	
-	const handleToggleFavorites = (item) => {
-		if (store.favorites.some((favorite) => favorite.uid === item.uid)) {
-			handleRemoveFromFavorites(item.uid);
-		} else {
-			handleAddToFavorites(item);
-		}
-	}
-	const isFavorite = (item) => {
-		return store.favorites.some((favorite) => favorite.uid === item.uid);
-	}
+
 
 	useEffect(() => {
 		const fetchPeople = async () => {
@@ -93,15 +85,15 @@ function CardsViwer() {
 					<div className="d-flex flex-row gap-3 overflow-auto justify-content-start" id="cardContainer">
 						{store.characters?.map((personajes, index) => (
 							<Card key={index} style={{ width: '13rem', }} className="flex-shrink-0" >
-								<Card.Img variant="top" src="https://github.com/tbone849/star-wars-guide/blob/master/build/assets/img/characters/20.jpg?raw=true" style={{height: '150px'}} />
+								<Card.Img variant="top" src="https://github.com/tbone849/star-wars-guide/blob/master/build/assets/img/characters/20.jpg?raw=true" style={{ height: '150px' }} />
 								<Card.Body>
 									<Card.Title>{personajes.name}</Card.Title>
 									<Card.Text>
 										{personajes.gender}
 									</Card.Text>
 									<div className="d-flex justify-content-between">
-									<Button variant="dark" >Learn more!!</Button>
-									<Button variant="danger" className="d-flex justify-content-center" onClick={()=>handleAddToFavorites(personajes)}><i className="fa-solid fa-star"></i></Button>
+										<Button variant="dark" onClick={() => navigate(`/demo/people/${personajes.uid}`)} >Learn more!!</Button>
+										<Button variant="danger" className="d-flex justify-content-center" onClick={() => handleAddToFavorites(personajes)}><i className="fa-solid fa-star"></i></Button>
 									</div>
 								</Card.Body>
 							</Card>
@@ -116,15 +108,15 @@ function CardsViwer() {
 					<div className="d-flex flex-row gap-3 overflow-auto justify-content-center" id="cardContainer">
 						{store.planets?.map((planetas, index) => (
 							<Card key={index} style={{ width: '13rem', }} className="flex-shrink-0" >
-								<Card.Img variant="top" src="https://github.com/tbone849/star-wars-guide/blob/master/build/assets/img/planets/13.jpg?raw=true" style={{height: '150px'}} />
+								<Card.Img variant="top" src="https://github.com/tbone849/star-wars-guide/blob/master/build/assets/img/planets/13.jpg?raw=true" style={{ height: '150px' }} />
 								<Card.Body>
 									<Card.Title>{planetas.name}</Card.Title>
 									<Card.Text>
 										{planetas.climate}
 									</Card.Text>
 									<div className="d-flex justify-content-between">
-									<Button variant="dark" >Learn more!!</Button>
-									<Button variant="danger" className="d-flex justify-content-center" onClick={()=>handleAddToFavorites(planetas)}><i className="fa-solid fa-star"></i></Button>
+										<Button variant="dark" onClick={() => navigate(`/demo/planets/${planetas.uid}`)}>Learn more!!</Button>
+										<Button variant="danger" className="d-flex justify-content-center" onClick={() => handleAddToFavorites(planetas)}><i className="fa-solid fa-star"></i></Button>
 									</div>
 								</Card.Body>
 							</Card>
@@ -139,15 +131,15 @@ function CardsViwer() {
 					<div className="d-flex flex-row gap-3 overflow-auto justify-content-center" id="cardContainer">
 						{store.vehicles?.map((vehicle, index) => (
 							<Card key={index} style={{ width: '13rem', }} className="flex-shrink-0" >
-								<Card.Img variant="top" src="https://github.com/tbone849/star-wars-guide/blob/master/build/assets/img/vehicles/30.jpg?raw=true" style={{height: '150px'}} />
-								<Card.Body>
+								<Card.Img variant="top" src="https://github.com/tbone849/star-wars-guide/blob/master/build/assets/img/vehicles/30.jpg?raw=true" style={{ height: '150px' }} />
+								<Card.Body className="d-flex flex-column">
 									<Card.Title>{vehicle.name}</Card.Title>
 									<Card.Text>
-										{vehicle.model}
+										{vehicle.vehicle_class}
 									</Card.Text>
-									<div className="d-flex justify-content-between mt-3">
-									<Button variant="dark" >Learn more!!</Button>
-									<Button variant="danger" className="d-flex justify-content-center" onClick={()=> handleAddToFavorites(vehicle)}><i className="fa-solid fa-star"></i></Button>
+									<div className="d-flex justify-content-between mt-auto">
+										<Button variant="dark" onClick={() => navigate(`/demo/vehicles/${vehicle.uid}`)} >Learn more!!</Button>
+										<Button variant="danger" className="d-flex justify-content-center" onClick={() => handleAddToFavorites(vehicle)}><i className="fa-solid fa-star"></i></Button>
 									</div>
 								</Card.Body>
 							</Card>
